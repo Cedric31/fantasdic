@@ -30,7 +30,7 @@ module Source
             GetText.bindtextdomain(Fantasdic::TEXTDOMAIN, nil, nil, "UTF-8")
 
             def initialize(server, port, username="", password="")
-                super("server_infos_dialog.glade")                
+                super("server_infos_dialog.glade")
                 @dialog.title = _("Server details")
                 @server = server
                 @port = port
@@ -68,7 +68,7 @@ module Source
                 super(*arg)
                 initialize_ui
                 initialize_data
-                initialize_signals                
+                initialize_signals
             end
 
             def to_hash
@@ -109,7 +109,7 @@ module Source
 
                 hbox = Gtk::HBox.new
                 hbox.spacing = 5
-                hbox.pack_start(@server_entry)                
+                hbox.pack_start(@server_entry)
                 hbox.pack_start(@server_info_button, false)
 
                 port_label = Gtk::Label.new(_("_Port:"), true)
@@ -181,7 +181,7 @@ module Source
                 @last_port = @port_entry.text
                 @last_login = @login_entry.text
                 @last_password = @password_entry.text
-                
+
                 [[@server_entry, "@last_server"],
                  [@port_entry, "@last_port"],
                  [@login_entry, "@last_login"],
@@ -237,10 +237,10 @@ module Source
                     @port_entry.text = DICTClient::DEFAULT_PORT.to_s
                 end
             end
-        end        
+        end
 
         def initialize(*args)
-            super(*args)            
+            super(*args)
         end
 
         def open
@@ -248,7 +248,7 @@ module Source
             # DICTClient::get_connection returns an active connection if
             # available or create a new one.
             DICTClient.close_long_connections
-            
+
             begin
                 if @config[:auth]
                     @dict = DICTClient.get_connection(Fantasdic::TITLE,
@@ -256,14 +256,14 @@ module Source
                                                       @config[:port],
                                                       @config[:login],
                                                       @config[:password])
-                else 
+                else
                     @dict = DICTClient.get_connection(Fantasdic::TITLE,
                                                       @config[:server],
                                                       @config[:port])
                 end
             rescue DICTClient::ConnectionError, Errno::ECONNRESET,
                    DICTClient::ConnectionLost => e
-                DICTClient.close_all_connections                
+                DICTClient.close_all_connections
                 raise Source::SourceError,
                       _("Could not connect to %s") % @config[:server]
             end

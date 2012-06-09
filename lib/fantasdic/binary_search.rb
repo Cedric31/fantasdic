@@ -71,7 +71,7 @@ module Fantasdic
 
 # Classes that include this module must be derived from File
 # and define the following methods:
-# 
+#
 # - get_prev_offset (instance method)
 # - get_next_offset (instance method)
 # - is_entry? (instance method)

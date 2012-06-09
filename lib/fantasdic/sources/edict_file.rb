@@ -92,7 +92,7 @@ class EdictFileBase < FileSource
     def define(db, word)
         wesc = escape_string(word)
         regexp = "^#{wesc} | #{wesc} \\[|\\[#{wesc}\\]|/#{wesc}/"
-        
+
         db = File.basename(@config[:filename])
         db_capitalize = db.capitalize
 
@@ -272,7 +272,7 @@ class EdictFile < (EdictFileBase::HAVE_EGREP ? EdictFileEgrep : EdictFileRuby)
     description _("Look up words in an EDICT file.")
     license Fantasdic::GPL
     copyright "Copyright (C) 2007 Mathieu Blondel"
-    no_databases true    
+    no_databases true
 end
 
 end

@@ -51,14 +51,14 @@ class TestDictzip < Test::Unit::TestCase
             assert_equal(file.pos, dzfile.pos)
 
             assert_equal(file.read(20), dzfile.read(20))
-            assert_equal(file.pos, dzfile.pos)   
+            assert_equal(file.pos, dzfile.pos)
 
             file.pos = 70
             dzfile.pos = 70
 
-            assert_equal(file.pos, dzfile.pos)           
+            assert_equal(file.pos, dzfile.pos)
             assert_equal(file.read(100), dzfile.read(100))
-            assert_equal(file.pos, dzfile.pos) 
+            assert_equal(file.pos, dzfile.pos)
         end
     end
 
@@ -68,11 +68,11 @@ class TestDictzip < Test::Unit::TestCase
 
         file.pos = 70
         dzfile.pos = 70
-        
+
         # max chunk size is 64KB so 100KB need two chunks
         assert_equal(file.read(100000), dzfile.read(100000))
-        assert_equal(file.pos, dzfile.pos)      
-        
+        assert_equal(file.pos, dzfile.pos)
+
         file.close
         dzfile.close
     end
@@ -92,14 +92,14 @@ class TestDictzip < Test::Unit::TestCase
         each do |file, dzfile|
             file = File.new(file)
             dzfile = Fantasdic::Dictzip.new(dzfile)
-            
+
             begin
                 yield file, dzfile
             ensure
                 file.close
                 dzfile.close
             end
-        end    
+        end
     end
 
 end

@@ -21,7 +21,7 @@ require 'yaml'
 module Fantasdic
 
     module Config
-    
+
         if WIN32
             CONFIG_DIR = File.join(ENV['USERPROFILE'],"fantasdic")
         else
@@ -33,14 +33,14 @@ module Fantasdic
     end
 
     class PreferencesBase
-    
+
         def initialize(config_file)
             @config_file = config_file
 
             @config = YAML.load(File.open(@config_file,
                                 File::CREAT|File::RDWR))
             if @config and @config.is_a? Hash
-                # merge with the default config in case of new parameters 
+                # merge with the default config in case of new parameters
                 dflt_config = YAML.load(File.open(Config::DEFAULT_CONFIG_FILE))
                 dflt_config.each_key do |key|
                     if !@config.has_key? key
@@ -53,12 +53,12 @@ module Fantasdic
 
             # copy the name of the dictionary in the dictionary info
             # so that it is available to the source object
-            # when the config hash is passed            
+            # when the config hash is passed
             self.dictionaries_infos.each_key do |key|
                 self.dictionaries_infos[key][:name] = key
             end
         end
-        
+
         def save!
             File.open(@config_file,
                       File::CREAT|File::TRUNC|File::RDWR, 0600) do |f|
@@ -114,7 +114,7 @@ module Fantasdic
         def dictionary_exists?(dictionary)
             self.dictionaries.include? dictionary
         end
-        
+
         def method_missing(id, *args)
             method = id.id2name
             if match = /(.*)=$/.match(method)
@@ -129,7 +129,7 @@ module Fantasdic
                           "without argument (was called with #{args.length})"
                 end
                 @config[method]
-            end                
+            end
         end
 
     end
@@ -139,7 +139,7 @@ module Fantasdic
 
         def initialize
             unless(FileTest.exists?(Config::CONFIG_DIR))
-                Dir.mkdir(Config::CONFIG_DIR)    
+                Dir.mkdir(Config::CONFIG_DIR)
             end
 
             super(Config::CONFIG_FILE)

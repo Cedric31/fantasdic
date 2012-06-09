@@ -153,7 +153,7 @@ class StardictFile < Base
     description _("Look up words in Stardict files.")
     license Fantasdic::GPL
     copyright "Copyright (C) 2008-2009 Mathieu Blondel"
-    no_databases true   
+    no_databases true
 
     STRATEGIES_DESC = {
         "define" => "Results match with the word exactly.",
@@ -205,7 +205,7 @@ class StardictFile < Base
         STRATEGIES_DESC
     end
 
-    def define(db, word)        
+    def define(db, word)
         db = File.basename(@config[:filename]).slice(0...-6)
         db_capitalize = db.capitalize
 
@@ -276,7 +276,7 @@ class StardictFile < Base
         file_info = StardictInfo.new(@config[:filename])
 
         if block_given?
-            ret = yield(index_file, dict_file, file_info) 
+            ret = yield(index_file, dict_file, file_info)
 
             index_file.close
             dict_file.close
@@ -314,7 +314,7 @@ class StardictFile < Base
                            ["<ex>", "<span color=\"grey\">"],
                            ["</ex>", "</span>"],
                            ["<co>", "<span color=\"blue\">"],
-                           ["</co>", "</span>"]]                          
+                           ["</co>", "</span>"]]
 
     def xdxf_to_pangomarkup!(txt)
         XDXF_TO_PANGOMARKUP.each do |from, to|

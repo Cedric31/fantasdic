@@ -30,7 +30,7 @@ def add_entry(entry)
     kw = []
     [:kanji, :readings, :translation].each do |k|
         kw += @entry[k] if @entry[k]
-    end    
+    end
     $dictfmt.add_entry(kw, txt)
 end
 
@@ -94,7 +94,7 @@ end
 
 def parse(file)
     list = Listener.new
-    
+
     if defined? XML::Parser
         list.parse(file.read)
     else

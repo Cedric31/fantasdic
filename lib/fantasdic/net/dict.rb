@@ -81,7 +81,7 @@ class DICTClient
     end
 
     # Class methods
-    
+
     # Connections are held for sometime so that it's faster to lookup words
     @@connections = {}
     @@current_connection = nil
@@ -117,7 +117,7 @@ class DICTClient
                 @@connections[key].auth(login, password)
             end
         end
-        @@current_connection = @@connections[key]        
+        @@current_connection = @@connections[key]
         @@connections[key]
     end
 
@@ -181,7 +181,7 @@ class DICTClient
         begin
             response = @sock.readline("\r\n")
         rescue EOFError
-            raise ConnectionLost    
+            raise ConnectionLost
         end
         $stderr.printf("RECV: %s", response) if @debug
         response
@@ -230,7 +230,7 @@ class DICTClient
     def get_hash_key_value(array_pairs)
         hash = Hash.new
         array_pairs.each do |key, value|
-            hash[key] = value    
+            hash[key] = value
         end
         hash
     end
@@ -258,7 +258,7 @@ class DICTClient
 
     def disconnect
         begin
-            exec_cmd('QUIT')        
+            exec_cmd('QUIT')
             @sock.close
         rescue
             # connection already closed by server
@@ -268,11 +268,11 @@ class DICTClient
 
     def define(db, word)
         definitions = Array.new
-    
+
         resp_code, resp_msg = exec_cmd('DEFINE %s "%s"' % [ db, word ])
 
         if error_response? resp_code or matches_present_response? resp_code
-            return [] 
+            return []
         end
 
         df = nil
@@ -366,4 +366,3 @@ if __FILE__ == $0
     pp dict.define('gcide', 'test')
     dict.disconnect
 end
-

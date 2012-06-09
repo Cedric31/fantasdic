@@ -168,7 +168,7 @@ class DictServer
                 begin
                     while msg = session.readline("\r\n")
                         puts "RECV: #{msg}" if $DEBUG
-    
+
                         case msg
                             when /^DEFINE/i
                                 define(session, msg)

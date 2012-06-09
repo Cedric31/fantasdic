@@ -44,7 +44,7 @@ class String
     def latin?
         self.unpack("U*").each do |char|
             if not (char >= 0 and char <= 0x00FF)
-                return false 
+                return false
             end
         end
         return true
@@ -60,7 +60,7 @@ class String
                     (char >= 0xF900 and char <= 0xFAFF) or
                     (char >= 0x2F800 and char <= 0x2FA1F)
                    )
-                return false 
+                return false
             end
         end
         return true
@@ -74,7 +74,7 @@ class String
         end
         return true
     end
-  
+
     def katakana?
         self.unpack("U*").each do |char|
             if not (char >= 0x30A0 and char <= 0x30FF)
@@ -83,7 +83,7 @@ class String
         end
         return true
     end
-  
+
     def kana?
         self.unpack("U*").each do |char|
             if not ((char >= 0x30A0 and char <= 0x30FF) or
@@ -106,7 +106,7 @@ class String
                     (char >= 0x30A0 and char <= 0x30FF) or
                     (char >= 0x3040 and char <= 0x309F)
                    )
-                return false 
+                return false
             end
         end
         return true
@@ -144,7 +144,7 @@ class File
         LOAD_PATH_SEPARATOR = ":"
     end
 
-    def self.which(pgm)        
+    def self.which(pgm)
         ENV['PATH'].split(LOAD_PATH_SEPARATOR).each do |dir|
             path = File.join(dir, pgm)
             return path if File.executable? path

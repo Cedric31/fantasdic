@@ -68,34 +68,34 @@ module UI
         def selected_search
             self.selected_iter[Column::SEARCH_HASH]
         end
-        
+
         def get_search_iter(search)
             self.model.each do |model, path, iter|
                 return iter if iter[Column::SEARCH_HASH] == search
-            end    
+            end
             return nil
-        end 
-               
+        end
+
         def prepend_search(search)
             search_iter = self.model.prepend()
             search_iter[Column::STRING] = search[:word]
             search_iter[Column::SEARCH_HASH] = search
             search_iter
         end
-        
+
         def append_search(search)
             search_iter = self.model.append()
             search_iter[Column::STRING] = search[:word]
             search_iter[Column::SEARCH_HASH] = search
             search_iter
         end
-        
-        def update(search)    
+
+        def update(search)
             # Append word to history
             search_iter = get_search_iter(search)
-            
+
             search_iter = prepend_search(search) if search_iter.nil?
-            
+
             # Delete a word if needed
             if self.model.nb_rows > @prefs.history_nb_rows
                 self.model.remove_last

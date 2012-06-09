@@ -25,15 +25,15 @@ module UI
         module Column
             MATCH = 0
         end
-        
+
         def initialize
             super()
             self.model = Gtk::ListStore.new(String)
             self.headers_visible = false
             self.rules_hint = true
-            
+
             @prefs = Preferences.instance
-            
+
             renderer = Gtk::CellRendererText.new
             col = Gtk::TreeViewColumn.new("Match", renderer)
 
@@ -44,27 +44,27 @@ module UI
             end
 
             append_column(col)
-            
+
             show_all
-        end   
-        
+        end
+
         def selected_match
             self.selected_iter[Column::MATCH]
         end
-        
+
         def get_match_iter(match)
             self.model.each do |model, path, iter|
                 return iter if iter[Column::MATCH] == match
-            end    
+            end
             return nil
-        end 
-               
+        end
+
         def prepend_match(match)
             iter = self.model.prepend()
             iter[Column::MATCH] = match
             iter
         end
-        
+
         def append_match(match)
             iter = self.model.append()
             iter[Column::MATCH] = match
@@ -88,15 +88,15 @@ module UI
             self.selection.select_iter(iter)
         end
 
-        def select_match(match)  
+        def select_match(match)
             # Append word to history
             iter = get_match_iter(match)
-            
+
             # Select the word if it is not currently selected
             if iter and selected_iter != iter
                 self.selection.select_iter(iter)
                 scroll_to_cell(iter.path, nil, false, 0.0, 0.0)
-            end            
+            end
         end
     end
 

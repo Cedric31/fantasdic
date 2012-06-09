@@ -143,11 +143,11 @@ class EpwingDictionary < Base
                 [subbook_name_to_id(book, db)]
             end
 
-            subbooks.each do |i| 
+            subbooks.each do |i|
                 book.subbook = i
                 items = book.method(func).call(word)
                 name = subbook_id_to_name(book, i)
-                
+
                 hsh[name] = items.map do |pos, head|
                     self.class.position_cache[[name, head]] ||= []
                     self.class.position_cache[[name, head]] << pos
@@ -209,7 +209,7 @@ class EpwingDictionary < Base
             w, h, fontcode = get_wide_font_size(16)
             eb.fontcode = fontcode
             raw = eb.get_widefont(code).to_bmp
-            b64 = Base64.encode64(raw).gsub("\n", "")            
+            b64 = Base64.encode64(raw).gsub("\n", "")
             "[img b64=\"#{b64}\" /]"
         end
 
@@ -218,7 +218,7 @@ class EpwingDictionary < Base
             w, h, fontcode = get_narrow_font_size(16)
             eb.fontcode = fontcode
             raw = eb.get_narrowfont(code).to_bmp
-            b64 = Base64.encode64(raw).gsub("\n", "")  
+            b64 = Base64.encode64(raw).gsub("\n", "")
             "[img b64=\"#{b64}\" /]"
         end
 
@@ -272,7 +272,7 @@ class EpwingDictionary < Base
 
         img_hook = Proc.new do |eb, argv|
             eb.read_colorgraphic(EB::Position.new(argv[2], argv[3])) do |raw|
-                b64 = Base64.encode64(raw).gsub("\n", "")  
+                b64 = Base64.encode64(raw).gsub("\n", "")
                 "[img b64=\"#{b64}\" /]"
             end
         end
@@ -316,4 +316,3 @@ end
 end
 
 Fantasdic::Source::Base.register_source(Fantasdic::Source::EpwingDictionary)
-

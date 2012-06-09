@@ -149,7 +149,7 @@ class TestPreferences < Test::Unit::TestCase
         assert_equal(@prefs.dictionaries_infos.has_key?("New"), false)
         @prefs.add_dictionary("New", {})
         assert_equal(@prefs.dictionaries_infos["New"],
-                     {:name=>"New"})        
+                     {:name=>"New"})
     end
 
     def test_delete_dictionary

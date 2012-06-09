@@ -74,7 +74,7 @@ def parse_word(word)
         elsif in_sense_num
             sense_num += char
         end
-            
+
     end
 
     hsh = {}
@@ -98,7 +98,7 @@ def parse
         if line =~ /^A: /
             japanese, english = line.slice(3...-1).split("\t")
         elsif line =~ /^B: /
-            words = line.slice(3...-1).split(" ")    
+            words = line.slice(3...-1).split(" ")
 
             words.each do |word|
                 wd = parse_word(word)[:wd]

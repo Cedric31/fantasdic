@@ -119,7 +119,7 @@ class VirtualDictionary < VirtualDictionaryBase
     title  _("Virtual dictionary")
     description _("Look up words in several dictionaries at once.")
     license Fantasdic::GPL
-    copyright "Copyright (C) 2008 Mathieu Blondel" 
+    copyright "Copyright (C) 2008 Mathieu Blondel"
 
     def initialize(*args)
         super(Preferences.instance, *args)

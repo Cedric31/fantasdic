@@ -47,12 +47,12 @@ end
 def self.get_browser
     # First try with gconf in order to get the default browser set in
     # System > Preferences > My favourite applications
-    if HAVE_GCONF2        
+    if HAVE_GCONF2
         client = GConf::Client.default
         dir = "/desktop/gnome/url-handlers/http/"
         if client[dir + "enabled"]
             return client[dir + "command"]
-        end        
+        end
     end
 
     # Second, see if user has not set a browser in the prefs file
@@ -78,7 +78,7 @@ end
 
 # Opens url in browser and returns true if succeeded
 def self.open_url(url)
-    if WIN32        
+    if WIN32
         wsh = WIN32OLE.new('Shell.Application')
         wsh.Open(url)
         return true

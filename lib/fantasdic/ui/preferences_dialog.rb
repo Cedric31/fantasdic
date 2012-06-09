@@ -18,7 +18,7 @@
 module Fantasdic
 module UI
 
-    class PreferencesDialog < GladeBase 
+    class PreferencesDialog < GladeBase
         include GetText
         GetText.bindtextdomain(Fantasdic::TEXTDOMAIN, nil, nil, "UTF-8")
 
@@ -27,7 +27,7 @@ module UI
 
         SELECTION = 0
         NAME = 1
-        
+
 
         def initialize(parent, statusicon, &callback_proc)
             super("preferences_dialog.glade")
@@ -36,16 +36,16 @@ module UI
             @preferences_dialog.modal = true
             @statusicon = statusicon
             @prefs = Preferences.instance
-            
+
             @callback_proc = callback_proc
             initialize_ui
             initialize_signals
         end
-      
+
         private
 
         def initialize_signals
-            initialize_dictionaries_signals            
+            initialize_dictionaries_signals
             initialize_startup_signals
             initialize_proxy_signals
         end
@@ -81,7 +81,7 @@ module UI
                 @dont_quit_checkbutton.sensitive = \
                     @dont_show_at_startup_checkbutton.sensitive = \
                         @show_in_tray_checkbutton.active?
-                
+
 
                 if !@show_in_tray_checkbutton.active?
                     @dont_quit_checkbutton.active = false
@@ -143,7 +143,7 @@ module UI
             end
 
             @configure_dictionary_button.signal_connect("clicked") do
-                selected_iter = @dictionary_treeview.selected_iter 
+                selected_iter = @dictionary_treeview.selected_iter
                 dicname = selected_iter[NAME]
                 hash = @prefs.dictionaries_infos[dicname]
                 AddDictionaryDialog.new(@preferences_dialog, dicname, hash) do
@@ -167,7 +167,7 @@ module UI
                 model.move_after(model.get_iter(new_path), iter)
                 sensitize_buttons
                 # up graphically = down in the array
-                @prefs.dictionary_down(name) 
+                @prefs.dictionary_down(name)
             end
 
             @dictionary_down_button.signal_connect("clicked") do
@@ -183,7 +183,7 @@ module UI
                 @prefs.dictionary_up(name)
             end
         end
-               
+
         def initialize_ui
             @dictionaries_nb_image.pixbuf = Icon::LOGO_22X22
 
@@ -203,7 +203,7 @@ module UI
 
             @http_proxy_vbox.visible = false
 
-            @proxy_combobox.model = Gtk::ListStore.new(String)           
+            @proxy_combobox.model = Gtk::ListStore.new(String)
             [_("SOCKS 5 proxy"), _("HTTP proxy")].each do |str|
                 row = @proxy_combobox.model.append
                 row[0] = str
@@ -221,15 +221,15 @@ module UI
             end
 
             @list_store = Gtk::ListStore.new(Fixnum,String)
-                        
+
             @dictionary_treeview.model = @list_store
             @dictionary_treeview.selection.mode = Gtk::SELECTION_SINGLE
-            
+
             renderer = Gtk::CellRendererToggle.new
             col = Gtk::TreeViewColumn.new("Active", renderer, :active => 0)
             @dictionary_treeview.append_column(col)
-            
-            renderer.signal_connect("toggled") do |toggled,row_iter| 
+
+            renderer.signal_connect("toggled") do |toggled,row_iter|
                 iter = @list_store.get_iter(row_iter)
                 selected = iter[SELECTION]
                 dicname = iter[NAME]
@@ -239,29 +239,29 @@ module UI
                 else
                     iter[SELECTION] = SEL
                     @prefs.dictionaries_infos[dicname][:selected] = SEL
-                end                
+                end
             end
 
             renderer = Gtk::CellRendererText.new
             renderer.editable = false # to true if lines below commented out
             col = Gtk::TreeViewColumn.new("Dictionary", renderer, :text => 1)
             @dictionary_treeview.append_column(col)
-            
+
             # renderer.signal_connect("edited") do |entry,row_iter,new|
             #     old = @list_store.get_iter(row_iter)[NAME]
             #     @list_store.get_iter(row_iter)[NAME] = new
             #     @prefs.dictionary_replace_name(old, new)
             # end
-       
+
             sensitize_buttons
-            
+
             @dictionary_treeview.selection.signal_connect("changed") do
                 sensitize_buttons
             end
 
             update_dic_list
         end
-        
+
         def sensitize_buttons
             selected_iter = @dictionary_treeview.selected_iter
             if selected_iter.nil?
@@ -290,14 +290,14 @@ module UI
                 append_dictionary(hash[:selected], name)
             end
         end
-        
+
         def append_dictionary(sel, name)
             row = @list_store.append()
             row[SELECTION] = sel
             row[NAME] = name
         end
-              
+
     end
-        
+
 end
 end

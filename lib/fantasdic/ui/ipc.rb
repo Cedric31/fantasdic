@@ -33,7 +33,7 @@ if Fantasdic::WIN32
 begin
 require "win32/pipe"
 require "base64"
-include Win32  
+include Win32
 
 module Fantasdic
 module UI
@@ -56,11 +56,11 @@ module IPC
             rescue PipeError
                 nil
             end
-        end    
+        end
 
         def initialize(uri, &block)
             pserver = Pipe.new_server(uri, Pipe::NOWAIT)
-            pserver.connect        
+            pserver.connect
             GLib::Timeout.add(800) do
                 ok = pserver.read
                 if ok
@@ -69,7 +69,7 @@ module IPC
                     #pserver.write("") # send data to client
                     pserver.close
                     pserver.connect
-                end      
+                end
                 true
             end
         end
@@ -80,7 +80,7 @@ end
 end
 
 rescue LoadError # win32/pipe
-  
+
 # IPC mechanism using Ruby DRb (Distributed Ruby)
 require "drb"
 
@@ -98,13 +98,13 @@ module IPC
 
         def self.find(uri)
             begin
-                DRb.start_service       
+                DRb.start_service
                 block = DRbObject.new nil, uri
                 block.to_proc
             rescue
                 nil
             end
-        end    
+        end
 
         def initialize(uri, &block)
             begin

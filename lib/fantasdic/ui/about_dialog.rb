@@ -55,6 +55,6 @@ module UI
             signal_connect('response') { destroy }
         end
     end
-    
+
 end
 end

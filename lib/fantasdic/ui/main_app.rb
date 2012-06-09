@@ -43,7 +43,7 @@ module UI
 
         def initialize(start_p={})
             super("main_app.glade")
-            @prefs = Preferences.instance            
+            @prefs = Preferences.instance
 
             @start_p = start_p
             @looking_up_mutex = Mutex.new
@@ -271,7 +271,7 @@ module UI
 
         def insert_definitions(definitions)
             @buf.clear
-            
+
             @buf.insert_definitions(definitions)
 
             # Status bar
@@ -279,7 +279,7 @@ module UI
                 msg = _("No definition found.")
                 self.status_bar_msg = msg
                 @buf.insert_header(msg)
-            else 
+            else
                 msg = ngettext("One definition found.",
                                "Definitions found: %d.",
                                definitions.length)
@@ -288,7 +288,7 @@ module UI
             end
         end
 
-        def match(source, p)  
+        def match(source, p)
             hash = @prefs.dictionaries_infos[p[:dictionary]]
 
             Gtk.thread_protect do
@@ -305,9 +305,9 @@ module UI
                                            p[:word])
             end
         end
-      
+
         def insert_matches(matches)
-            @buf.clear            
+            @buf.clear
 
             if matches.length > 0
                 @matches_listview.append_matches(matches)
@@ -325,7 +325,7 @@ module UI
                 @matches_label.text = _("Matches")
                 @buf.insert_header(msg)
                 self.status_bar_msg = msg
-            end            
+            end
         end
 
         def status_bar_msg=(message)
@@ -336,7 +336,7 @@ module UI
             @result_text_view.buffer.font_name = font_name
         end
 
-        def scan_clipboard            
+        def scan_clipboard
             last_selection = nil
             clipboard = Gtk::Clipboard.get(Gdk::Selection::CLIPBOARD)
             clipboard.request_text do |cb, text|
@@ -359,7 +359,7 @@ module UI
                 end
                 @scan_clipboard
             end
-        end        
+        end
 
         # Preferencces
 
@@ -375,7 +375,7 @@ module UI
                 @main_app.move(*@prefs.window_position) unless \
                     @prefs.window_position == [0,0]
             end
-            
+
             @global_actions["Statusbar"].active = @prefs.view_statusbar
             @global_actions["Toolbar"].active = @prefs.view_toolbar
             @matches_sidepane.position = @prefs.sidepane_position
@@ -386,13 +386,13 @@ module UI
             @prefs.last_searches.each do |search|
                 @search_cb_entry.append_search(search)
             end
-            
+
             unless @prefs.last_searches.nil? or \
                    @prefs.last_searches.length == 0 or \
                    @prefs.lookup_at_start.nil? or \
                    @prefs.lookup_at_start == false or !@start_p.empty?
 
-                lookup(@prefs.last_searches.first) 
+                lookup(@prefs.last_searches.first)
             end
         end
 
@@ -455,7 +455,7 @@ module UI
             @global_actions["ScanClipboard"].active = @prefs.scan_clipboard
         end
 
-        def load_preferences            
+        def load_preferences
             load_window_preferences
             load_print_preferences if HAVE_PRINT
             load_dictionary_preferences
@@ -536,7 +536,7 @@ module UI
             hash = @prefs.dictionaries_infos[selected_dictionary]
 
             if hash
-                @strategy_cb.sensitive = true                
+                @strategy_cb.sensitive = true
                 dflt_strat = default_strategy_of_selected_dictionary
                 strats = [dflt_strat]
                 strats += hash[:avail_strats] unless hash[:avail_strats].nil?
@@ -544,7 +544,7 @@ module UI
 
                 strats.each do |strat|
                     row = @strategy_cb.model.append
-                    row[0] = strat    
+                    row[0] = strat
                 end
 
                 if hash[:sel_strat]
@@ -559,7 +559,7 @@ module UI
 
         def selected_strategy
             n = @strategy_cb.active
-            @strategy_cb.model.get_iter(n.to_s)[0] if n >= 0                
+            @strategy_cb.model.get_iter(n.to_s)[0] if n >= 0
         end
 
         def selected_strategy=(strat)
@@ -635,17 +635,17 @@ module UI
 
             # Search menu items
             dictionary_menu_append_search_item(menu, selected_dictionary, word)
-           
+
             menu.append(Gtk::SeparatorMenuItem.new)
             @dictionary_cb.model.each do |model, path, iter|
                 name = iter[0]
-                if name != selected_dictionary              
+                if name != selected_dictionary
                     dictionary_menu_append_search_item(menu, name, word)
                 end
             end
             menu.append(Gtk::SeparatorMenuItem.new)
 
-            # Zoom            
+            # Zoom
             if word.strip.utf8_length == 1
                 item = Gtk::ImageMenuItem.new(_("Zoom over character"))
                 item.signal_connect("activate") do |mitem|
@@ -688,14 +688,14 @@ module UI
             end
             sensitize_go_buttons
         end
-        
+
         def sensitize_go_buttons
             sensitize_go_page_buttons
             sensitize_go_definition_buttons
             sensitize_go_database_buttons
         end
 
-        def sensitize_go_page_buttons          
+        def sensitize_go_page_buttons
             @global_actions["GoBack"].sensitive = \
                 (@current_page == 0) ? false : true
             @global_actions["GoForward"].sensitive = \
@@ -773,7 +773,7 @@ module UI
                     @global_actions[a].sensitive = true
                 end
             end
-        end   
+        end
 
         # Initialize
 
@@ -782,12 +782,12 @@ module UI
 
             # Tray icon
             if HAVE_STATUS_ICON
-                @main_app.destroy_with_parent = false                
+                @main_app.destroy_with_parent = false
                 @statusicon = Gtk::StatusIcon.new
                 @statusicon.pixbuf = Icon::LOGO_22X22
-                @statusicon.visible = @prefs.show_in_tray            
+                @statusicon.visible = @prefs.show_in_tray
             end
-            
+
             # Find pane
             @find_pane.visible = false
             @not_found_label.visible = false
@@ -907,7 +907,7 @@ module UI
                 @find_pane.visible = true
                 @find_entry.text = ""
                 @find_entry.grab_focus
-                
+
             end
 
             on_find_next = Proc.new do
@@ -1072,20 +1072,20 @@ module UI
                  on_go_forward],
                 ["GoPrevDefinition", nil, _("_Previous Definition"),
                  "<ctrl>Page_Up", nil, on_go_prev_def],
-                ["GoNextDefinition", nil, _("_Next Definition"),                
+                ["GoNextDefinition", nil, _("_Next Definition"),
                  "<ctrl>Page_Down", nil, on_go_next_def],
                 ["GoFirstDefinition", nil, _("_First Definition"),
                  "<ctrl>Home", nil, on_go_first_def],
-                ["GoLastDefinition", nil, _("_Last Definition"),                
+                ["GoLastDefinition", nil, _("_Last Definition"),
                  "<ctrl>End", nil, on_go_last_def],
                 ["GoPrevDatabase", nil, _("Previous Database"),
                  "<ctrl><shift>Page_Up", nil, on_go_prev_db],
-                ["GoNextDatabase", nil, _("Next Database"),                
+                ["GoNextDatabase", nil, _("Next Database"),
                  "<ctrl><shift>Page_Down", nil, on_go_next_db],
                 ["GoFirstDatabase", nil, _("First Database"),
                  "<ctrl><shift>Home", nil, on_go_first_db],
-                ["GoLastDatabase", nil, _("Last Database"),                
-                 "<ctrl><shift>End", nil, on_go_last_db],            
+                ["GoLastDatabase", nil, _("Last Database"),
+                 "<ctrl><shift>End", nil, on_go_last_db],
 
                 # Help
                 ["HelpMenu", nil, _("_Help")],
@@ -1103,12 +1103,12 @@ module UI
                  on_find_prev],
                 ["CtrlEqual", Gtk::Stock::FIND, nil, "<ctrl>equal", nil,
                  on_zoom_plus]
-               
+
             ]
 
             # Toggle actions
 
-            on_toggle_scan_clipboard = Proc.new do                
+            on_toggle_scan_clipboard = Proc.new do
                 @scan_clipboard = @global_actions["ScanClipboard"].active?
                 scan_clipboard if @scan_clipboard
             end
@@ -1117,11 +1117,11 @@ module UI
                 @matches_sidepane.child1.visible = \
                     @global_actions["MatchesSidepane"].active?
             end
-            
+
             on_toggle_statusbar = Proc.new do
                 @statusbar.visible = @global_actions["Statusbar"].active?
             end
-            
+
             on_toggle_toolbar = Proc.new do
                 @toolbar.visible = @global_actions["Toolbar"].active?
             end
@@ -1147,28 +1147,28 @@ module UI
             @global_actions = Gtk::ActionGroup.new("Standard actions")
             @global_actions.add_actions(standard_actions)
             @global_actions.add_toggle_actions(toggle_actions)
-            
+
             @global_actions["GoBack"].sensitive = false
             @global_actions["GoForward"].sensitive = false
 
             @global_actions["Stop"].visible = false
 
             # UI Manager
-            
+
             @uimanager = Gtk::UIManager.new
             @uimanager.insert_action_group(@global_actions, 0)
             @main_app.add_accel_group(@uimanager.accel_group)
-            
+
             ["menus.xml", "toolbar.xml", "popups.xml"].each do |ui_file|
                 @uimanager.add_ui(File.join(Fantasdic::Config::DATA_DIR,
                                             "ui", ui_file))
-            
+
             end
 
             # Add menu and toolbar to the main window
             menubar = @uimanager.get_widget("/MainMenubar")
             @main_app.child.pack_start(menubar,false).reorder_child(menubar,0)
-            
+
             @toolbar = @uimanager.get_widget("/Toolbar")
             @toolbar.border_width = 0
             @main_app.child.pack_start(@toolbar, false)
@@ -1203,7 +1203,7 @@ module UI
             end
 
             @on_delete_event_proc = Proc.new do
-                if @statusicon and @prefs.dont_quit                    
+                if @statusicon and @prefs.dont_quit
                     save_window_preferences
                     @main_app.hide_on_delete
                 else
@@ -1233,7 +1233,7 @@ module UI
 
             IPC::Instance.new(IPC::Instance::REMOTE) do |p|
                 @main_app.show
-                load_window_preferences              
+                load_window_preferences
 
                 @main_app.present
 
@@ -1261,7 +1261,7 @@ module UI
             end
 
             @find_entry.signal_connect("changed") do |w, ev|
-                ret = @result_text_view.find_forward(@find_entry.text, true)    
+                ret = @result_text_view.find_forward(@find_entry.text, true)
                 @not_found_label.visible = !ret
             end
 
@@ -1282,7 +1282,7 @@ module UI
             @main_app.signal_connect("window-state-event") do |w, e|
                 if e.is_a?(Gdk::EventWindowState)
                     @maximized = \
-                        e.new_window_state == Gdk::EventWindowState::MAXIMIZED 
+                        e.new_window_state == Gdk::EventWindowState::MAXIMIZED
                 end
             end
 
@@ -1312,9 +1312,9 @@ module UI
                 end
             end
 
-            
+
             @result_sw.vadjustment.signal_connect("value-changed") do
-                # Sensitize Go buttons according to 
+                # Sensitize Go buttons according to
                 # the vertical scroll position
                 adj = @result_sw.vadjustment
                 height = (adj.upper - adj.lower - adj.page_size)

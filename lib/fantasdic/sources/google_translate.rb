@@ -99,7 +99,7 @@ module Source
 
         def define(db, word)
             db_escaped, word_escaped = CGI.escape(db), CGI.escape(word)
-            begin               
+            begin
                 Kernel::open(URL % [db_escaped, word_escaped]) do |buffer|
                     case buffer.read
                         when /#{START_MARKUP}(.*)/

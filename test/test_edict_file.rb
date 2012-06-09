@@ -33,7 +33,7 @@ class TestEdictFileSource < Test::Unit::TestCase
     include Fantasdic::Source
 
     private
-    
+
     def test_check_validity(source)
         assert_nothing_raised do
             source.check_validity
@@ -258,7 +258,7 @@ class TestEdictFileSourceWithCedict < Test::Unit::TestCase
                             "(N) Alashan zuoqi (place in Ningxia)",
                             "(N) Aluke'erqin qi (place in Inner Mongolia)",
                             "(N) Arongqi (place in Heilongjiang)"]})
-    
+
         matches = source.match("*", "suffix", "ada")
         key = matches.keys.first
         assert_equal(matches,

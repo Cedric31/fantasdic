@@ -19,33 +19,33 @@ module Fantasdic
 module UI
 
     class MessageDialog < Gtk::MessageDialog
-    
+
         def initialize(parent, message, type)
             super(parent, Gtk::Dialog::Flags::MODAL,
             type, Gtk::MessageDialog::BUTTONS_OK,
             message)
-            
+
             self.signal_connect("response") { self.destroy }
-            
+
             self.run
         end
-    
+
     end
 
     class ErrorDialog < MessageDialog
-    
+
         def initialize(parent, message = nil)
             super(parent, message, Gtk::MessageDialog::ERROR)
         end
-        
+
     end
-    
+
     class InfoDialog < MessageDialog
-    
+
         def initialize(parent, message = nil)
             super(parent, message, Gtk::MessageDialog::INFO)
         end
-        
+
     end
 
 end

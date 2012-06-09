@@ -60,7 +60,7 @@ class TestStardictFileSource < Test::Unit::TestCase
                          [["brightness", 5735, 29], ["darkness", 9156, 23],
                           ["gentleness", 13137, 26],
                           ["inquisitiveness", 16249, 33],
-                          ["righteousness", 25319, 28],                       
+                          ["righteousness", 25319, 28],
                           ["sharpness", 26665, 25], ["sickness", 27125, 54],
                           ["wickedness", 33816, 26]])
         end

@@ -49,42 +49,42 @@ class TestUtils < Test::Unit::TestCase
         assert_equal("Русский".latin?, false)
     end
 
-    def test_hiragana        
+    def test_hiragana
         assert_equal("ひらがな".hiragana?, true)
         assert_equal("ひらがな".katakana?, false)
         assert_equal("ひらがな".kanji?, false)
 
 hiragana = <<EOL
 ぁあぃいぅううぇえぉお
-かがきぎくぐけげこご     
+かがきぎくぐけげこご
 さざしじすずせぜそぞ
-ただちぢっつづてでとど 
-なにぬねの   
-はばぱひびぴふぶぷへべぺほぼぽ   
+ただちぢっつづてでとど
+なにぬねの
+はばぱひびぴふぶぷへべぺほぼぽ
 まみむめも
-ゃやゅゆょよ    
-らりるれろ     
+ゃやゅゆょよ
+らりるれろ
 ゎわゐゑをん
 EOL
         hiragana.gsub!(/[\s\n]+/, "")
         assert_equal(hiragana.hiragana?, true)
     end
 
-    def test_katakana        
+    def test_katakana
         assert_equal("カタカナ".hiragana?, false)
         assert_equal("カタカナ".katakana?, true)
         assert_equal("カタカナ".kanji?, false)
 
 katakana = <<EOL
 ァアィイゥウヴェエォオ
-カガキギクグケゲコゴ   
+カガキギクグケゲコゴ
 サザシジズセゼソゾ
 タダチヂ
-ッツヅテデトド   
+ッツヅテデトド
 ナニヌネノ
-ハバパヒビピフブプヘベペホボポ 
+ハバパヒビピフブプヘベペホボポ
 マミムメモ
-ャヤュユョヨ   
+ャヤュユョヨ
 ラリルレロ
 ヮワヲン
 EOL
@@ -93,19 +93,19 @@ EOL
         assert_equal(katakana.katakana?, true)
     end
 
-    def test_kanji      
+    def test_kanji
         assert_equal("漢字".hiragana?, false)
         assert_equal("漢字".katakana?, false)
         assert_equal("漢字".kanji?, true)
     end
 
-    def test_kana       
+    def test_kana
         assert_equal("ひらがな".kana?, true)
         assert_equal("カタカナ".kana?, true)
         assert_equal("漢字".kana?, false)
     end
 
-    def test_japanese      
+    def test_japanese
         assert_equal("ひらがな".japanese?, true)
         assert_equal("カタカナ".japanese?, true)
         assert_equal("漢字".japanese?, true)

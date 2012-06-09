@@ -101,7 +101,7 @@ class TestSourceBase < Test::Unit::TestCase
         assert_equal(@source.n_define_calls, 5)
 
         test_define_number("5", "25")
-        assert_equal(@source.n_define_calls, 5)  
+        assert_equal(@source.n_define_calls, 5)
     end
 
     def test_match
@@ -142,7 +142,7 @@ class TestSourceBase < Test::Unit::TestCase
         assert_equal(@source.n_match_calls, 5)
 
         test_match_number("5", "25")
-        assert_equal(@source.n_match_calls, 5)  
+        assert_equal(@source.n_match_calls, 5)
     end
 
 end

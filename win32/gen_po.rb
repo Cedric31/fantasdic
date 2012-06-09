@@ -17,7 +17,7 @@
 
 Dir.chdir("../")
 
-$LOAD_PATH.unshift("../ruby-gettext/lib/")  
+$LOAD_PATH.unshift("../ruby-gettext/lib/")
 
 require 'rbconfig'
 if /mingw|mswin|mswin32/ =~ RUBY_PLATFORM
@@ -26,7 +26,7 @@ if /mingw|mswin|mswin32/ =~ RUBY_PLATFORM
     }.join('') + ENV['PATH']
 end
 
-require "gettext"      
+require "gettext"
 require "gettext/poparser"
 
 basename = "fantasdic"
@@ -42,9 +42,8 @@ Dir.glob("po/*.po") do |file|
         Dir.mkdir(path) unless FileTest.exists?(path)
     end
 
-	parser = GetText::PoParser.new
-	data = MOFile.new
-	parser.parse(File.open("po/#{lang}.po").read, data)
-	data.save_to_file("#{mo_path}/#{basename}.mo")
+    parser = GetText::PoParser.new
+    data = MOFile.new
+    parser.parse(File.open("po/#{lang}.po").read, data)
+    data.save_to_file("#{mo_path}/#{basename}.mo")
 end
-

@@ -97,7 +97,7 @@ module UI
         end
 
         def sensitize_move_up
-            @move_up_button.sensitive = @sel_db_treeview.has_row_selected?     
+            @move_up_button.sensitive = @sel_db_treeview.has_row_selected?
         end
 
         def sensitize_move_down
@@ -166,7 +166,7 @@ module UI
                                                                iter|
                     unless sel_dbs_have? iter[NAME]
                         row = @sel_db_treeview.model.append
-        
+
                         row[NAME] = iter[NAME]
                         row[DESC] = iter[DESC]
                     end
@@ -203,7 +203,7 @@ module UI
                 # Renderer which slice too long names
                 renderer = Gtk::CellRendererText.new
                 col = Gtk::TreeViewColumn.new("Database", renderer)
-                
+
                 col.set_cell_data_func(renderer) do |col, renderer, model, iter|
                     str = "%s (%s)" % [iter[NAME], iter[DESC]]
                     str = str.utf8_slice(0..40) + "..." \
@@ -340,7 +340,7 @@ module UI
 
             if @config and @config[:source]
                 self.selected_source = @config[:source]
-            elsif 
+            elsif
                 self.selected_source = Source::Base::DEFAULT_SOURCE
             end
 
@@ -407,7 +407,7 @@ module UI
                         @config[:sel_dbs].each do |name|
                             unless sel_db_desc[name].nil?
                                 row = @sel_db_treeview.model.append
-            
+
                                 row[NAME] = name
                                 row[DESC] = sel_db_desc[name]
                             end
@@ -433,7 +433,7 @@ module UI
                     sensitize_databases
                     @print_vbox.visible = Fantasdic::UI::HAVE_PRINT
                 end
-            end            
+            end
         end
 
         def set_source(src_str)
@@ -491,8 +491,8 @@ module UI
                 n += 1
             end
         end
-      
+
     end
-        
+
 end
 end

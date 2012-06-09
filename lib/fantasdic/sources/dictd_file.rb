@@ -67,7 +67,7 @@ class DictdIndex < DictionaryIndex
             0
         else
             offset += i + 1
-            offset            
+            offset
         end
     end
 
@@ -109,7 +109,7 @@ class DictdIndex < DictionaryIndex
     def match_binary_search(word, &comp)
         binary_search_all(word) do |s1, s2|
             comp.call(s1.downcase, s2.downcase)
-        end        
+        end
     end
 
     def match_suffix(word)
@@ -127,7 +127,7 @@ class DictdIndex < DictionaryIndex
             DictdIndex.get_fields(line)
         end.find_all do |curr_word, offset, len|
             curr_word.include?(word)
-        end        
+        end
     end
 
     def get_word_list
@@ -144,7 +144,7 @@ class DictdFile < Base
     description _("Look up words in files aimed for the dictd server.")
     license Fantasdic::GPL
     copyright "Copyright (C) 2008 Mathieu Blondel"
-    no_databases true   
+    no_databases true
 
     STRATEGIES_DESC = {
         "define" => "Results match with the word exactly.",
@@ -212,7 +212,7 @@ class DictdFile < Base
         STRATEGIES_DESC
     end
 
-    def define(db, word)        
+    def define(db, word)
         db = File.basename(@config[:filename]).slice(0...-6)
         db_capitalize = db.capitalize
 
@@ -231,7 +231,7 @@ class DictdFile < Base
                     msg = msg % [index_file.path, offset, len, dict_file.path]
                     defi.body = msg
                 end
-                                
+
                 defi.database = db
                 defi.description = db_capitalize
                 defi
@@ -289,7 +289,7 @@ class DictdFile < Base
         index_file = DictdIndex.new(@config[:filename])
 
         if block_given?
-            ret = yield(index_file, dict_file) 
+            ret = yield(index_file, dict_file)
 
             index_file.close
             dict_file.close

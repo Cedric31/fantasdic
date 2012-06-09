@@ -122,7 +122,7 @@ class Listener < ListenerAbstract
         txt = txt.chomp.strip
         if ["literal", "grade", "stroke_count", "freq"].include? @curr_tag
             @character[@curr_tag.to_sym] << txt
-        
+
         elsif @curr_tag == "reading"
             @readings[@curr_attrs['r_type'].to_sym] ||= []
             @readings[@curr_attrs['r_type'].to_sym] << txt
@@ -137,7 +137,7 @@ end
 
 def parse(file)
     list = Listener.new
-    
+
     if defined? XML::Parser
         list.parse(file.read)
     else

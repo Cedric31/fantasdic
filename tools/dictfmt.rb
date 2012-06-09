@@ -34,7 +34,7 @@ class Dictfmt
             thispart = (val >> (6 * i)) & ((2 ** 6) - 1)
             next if startfound == 0 and thispart == 0
             startfound = 1
-            retval += B64[thispart]                
+            retval += B64[thispart]
         end
         if retval.empty?
             B64[0]
@@ -60,7 +60,7 @@ class Dictfmt
 
     def format_kw(kw)
         kw.gsub!(/(\"|\(|\)|\'|\,|^\-)/, "")
-        kw = kw.chomp.strip.downcase        
+        kw = kw.chomp.strip.downcase
     end
 
     def initialize(index_path, dic_path, quiet=true)
@@ -105,7 +105,7 @@ class Dictfmt
 
         @current_offset += len
         @dic_file.write(text)
-        
+
 
         if @processed % 50 == 0 and !@quiet
             $stderr.write "%10d headwords\r" % @processed

@@ -91,7 +91,7 @@ class TestDictdFileSource < Test::Unit::TestCase
                          map { |a| a.first }, ["00databasealphabet"])
 
             assert_equal(index.match_exact("\303\242b").map { |a| a.first },
-                         ["\303\242b"])  
+                         ["\303\242b"])
         end
     end
 

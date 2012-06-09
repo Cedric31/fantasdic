@@ -17,8 +17,8 @@
 
 require 'libglade2'
 begin
-    require 'gnome2' 
-rescue LoadError    
+    require 'gnome2'
+rescue LoadError
     require 'gtk2'
     Fantasdic.missing_dependency('Ruby/GNOME2', 'Better integration in GNOME')
 end
@@ -53,13 +53,13 @@ module UI
 
         if instance
             IPC::Instance.send(instance, IPC::Instance::REMOTE, params)
-        else             
+        else
             MainApp.new(params)
             Gtk.main
         end
     end
 
-    
+
 end
 end
 

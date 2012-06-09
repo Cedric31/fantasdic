@@ -19,7 +19,7 @@
   $Id: sockssocket.rb,v 1.1.1 2006/11/15 00:00:00 rtokiwa Exp $
 
 == class SOCKSSocket
-    
+
 : initialize
     override
 
@@ -64,14 +64,14 @@ module Net
     end
 
     def initialize(host, service)
-      socks_ver, socks_addr, socks_port = 5,*($_.split(':')) if 
+      socks_ver, socks_addr, socks_port = 5,*($_.split(':')) if
         !self.class.socks_addr && ( $_=ENV['SOCKS_SERVER'] || $_=ENV['SOCKS5_SERVER'] )
 #      socks_ver, socks_addr, socks_port = 4,*$_.split(':') if !self.class.socks_addr && $_=ENV['SOCKS4_SERVER']
 #      socks_ver, socks_addr, socks_port = 5,*$_.split(':') if !self.class.socks_addr && $_=ENV['SOCKS5_SERVER']
       socks_ver = $_ if !self.class.socks_ver && $_=ENV['SOCKS_VERSION']
       socks_user = $_ if !self.class.socks_user && $_=ENV['SOCKS_USER']
       socks_pass = $_ if !self.class.socks_pass && ( $_=ENV['SOCKS_PASSWORD'] || $_=ENV['SOCKS_PASSWD'] )
-      socks_ver, socks_addr, socks_port = 
+      socks_ver, socks_addr, socks_port =
         self.class.socks_ver, self.class.socks_addr, self.class.socks_port if self.class.socks_addr
       socks_port ||= 1080
       if socks_addr

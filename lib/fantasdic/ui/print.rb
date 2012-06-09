@@ -36,7 +36,7 @@ class Print < Gtk::PrintOperation
         @prefs = Preferences.instance
         font = @prefs.dictionaries_infos[dictionary][:print_font_name]
 
-        @font = font.nil? ? DEFAULT_FONT : Pango::FontDescription.new(font)  
+        @font = font.nil? ? DEFAULT_FONT : Pango::FontDescription.new(font)
 
         @font_big = @font.dup
         @font_big.size = (@font_big.size * 1.2).round
@@ -54,15 +54,15 @@ class Print < Gtk::PrintOperation
         self.default_page_setup = page_setup
 
         # show a progress bar
-        self.show_progress = true        
+        self.show_progress = true
 
         signal_connect("begin-print") do |pop, context|
-            pop.n_pages = calculate_n_pages(pop, context)            
+            pop.n_pages = calculate_n_pages(pop, context)
         end
 
         signal_connect("draw-page") do |pop, context, page_num|
             draw_page(pop, context, page_num)
-        end        
+        end
     end
 
     def run_print_dialog
@@ -75,7 +75,7 @@ class Print < Gtk::PrintOperation
 #             when RESULT_APPLY
 #                 puts "applied"
 #             when RESULT_IN_PROGRESS
-#                 puts "in progress"            
+#                 puts "in progress"
 #         end
     end
 
@@ -169,7 +169,7 @@ class Print < Gtk::PrintOperation
             n_empty += 1 if layout.text.strip.empty?
         end
         @page_layouts.pop if @page_layouts.last.length == n_empty
-        
+
         @page_layouts.length
     end
 
@@ -199,7 +199,7 @@ class Print < Gtk::PrintOperation
         cr.show_pango_layout(layout)
     end
 
-    def draw_footer(cr)        
+    def draw_footer(cr)
         layout = cr.create_pango_layout
         layout.alignment = Pango::Layout::ALIGN_RIGHT
         layout.font_description = FONT_SMALL
@@ -228,10 +228,10 @@ class Print < Gtk::PrintOperation
 
         @page_layouts[page_num].each do |layout|
             cr.move_to(x,y)
-            cr.show_pango_layout(layout)            
+            cr.show_pango_layout(layout)
             y += layout.height_points
         end
-        
+
         draw_footer(cr)
     end
 

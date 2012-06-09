@@ -20,7 +20,7 @@ Dir.glob("po/*.po") do |file|
         puts path
         Dir.mkdir(path) unless FileTest.exists?(path)
     end
-    
+
     system("msgfmt po/#{lang}.po -o #{mo_path}/#{basename}.mo")
 
     $stderr.puts "msgfmt failed on po/#{lang}.po" if $? != 0

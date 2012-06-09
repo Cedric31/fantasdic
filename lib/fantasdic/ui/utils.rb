@@ -62,7 +62,7 @@ class Gtk::TreeView
         self.selection.selected_each { return true }
         return false
     end
-    
+
     def selected_iter
         self.selection.selected
     end
@@ -87,7 +87,7 @@ module Gtk::TreeModel
 
     def empty?
         nb_rows == 0
-    end    
+    end
 end
 
 class Gtk::ListStore
@@ -185,7 +185,7 @@ class Gtk::TextBuffer
             insert(iter, markup_text)
             return
         end
-            
+
         # create_mark(name, iter, left= true or right=false)
         # mark = create_mark(nil, iter, false)
 
@@ -219,7 +219,7 @@ class Gtk::TextBuffer
 
             self.tag_table.add(tag)
 
-            insert_with_tags(iter, text.slice(start...end_), *tags) 
+            insert_with_tags(iter, text.slice(start...end_), *tags)
 
             #iter = get_iter_at_mark(mark)
 

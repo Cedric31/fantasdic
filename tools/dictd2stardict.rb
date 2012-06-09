@@ -76,6 +76,6 @@ if $0 == __FILE__
         File.open(out_ifofile, File::CREAT|File::RDWR) do |f|
             f.write(ifo_file(dicname, entries.length, File.size(out_indexfile)))
         end
-        
+
     end
 end

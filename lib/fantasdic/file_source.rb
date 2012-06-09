@@ -61,7 +61,7 @@ class DictionaryIndex < File
                 end
             end
             ret
-        end         
+        end
     end
 
     def match_stem(word)
@@ -71,21 +71,21 @@ class DictionaryIndex < File
     def match_lev(word)
         get_word_list.find_all do |curr_word, offset, len|
             word.levenshtein(curr_word) < MAX_LEV_DISTANCE
-        end        
+        end
     end
 
     def match_soundex(word)
         soundex = word.soundex
         get_word_list.find_all do |curr_word, offset, len|
             soundex == curr_word.soundex
-        end   
+        end
     end
 
     def match_metaphone(word)
         metaphone = word.metaphone
         get_word_list.find_all do |curr_word, offset, len|
             metaphone == curr_word.metaphone
-        end   
+        end
     end
 
     def match_metaphone2(word)
@@ -103,7 +103,7 @@ class DictionaryIndex < File
         pair1 = word.double_metaphone
         get_word_list.find_all do |curr_word, offset, len|
             is_equal?(pair1, curr_word.double_metaphone)
-        end   
+        end
     end
 
     def match_regexp(regexp)
@@ -114,7 +114,7 @@ class DictionaryIndex < File
         else
             get_word_list.find_all do |curr_word, offset, len|
                 curr_word =~ r
-            end             
+            end
         end
     end
 
@@ -137,7 +137,7 @@ class FileSource < Base
             end
 
             hash = {
-                :filename => @file_chooser_button.filename,  
+                :filename => @file_chooser_button.filename,
             }
 
             if @encodings.length > 0

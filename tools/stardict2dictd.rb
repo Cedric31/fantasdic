@@ -19,34 +19,34 @@ def puts_def(dic_file, headword, offset, size)
     if size < 10000 and not headword.empty?
         dic_file.seek(offset)
         definition = dic_file.read(size)
-    
+
         puts "_____\n\n#{headword}"
         puts " "
         puts definition
         puts " "
-    
+
     end
 end
 
 def parse(basename)
-  
+
     idx_file = File.open(basename + '.idx')
     dic_file = File.open(basename + '.dict')
-      
+
     i = 0
-    
+
     headword = ''
     offset = ''
     size = ''
-    
+
     in_headword = true
     in_offset = false
     in_size = false
-    
+
     idx_file.each_line do |line|
-    
+
         line.split(//).each do |char|
-            if in_headword 
+            if in_headword
                 if char != "\0"
                     headword += char
                 else
@@ -55,7 +55,7 @@ def parse(basename)
                 end
             elsif in_offset
                 offset += char
-    
+
                 if offset.length == 4
                     offset = offset.unpack("N*")[0]
                     in_offset = false
@@ -63,25 +63,25 @@ def parse(basename)
                 end
             elsif in_size
                 size += char
-    
+
                 if size.length == 4
                     size = size.unpack("N*")[0]
                     in_size = false
                     in_headword = true
-    
+
                     puts_def(dic_file, headword, offset, size)
-    
+
                     headword = ''
                     offset = ''
                     size = ''
-                
+
                     i += 1
-                end       
+                end
             end
-    
+
         end
-    
-        
+
+
     end
     idx_file.close
     dic_file.close
@@ -200,7 +200,7 @@ if $0 == __FILE__
         usage
 
     elsif ARGV[0] == '--all'
-        convert_all        
+        convert_all
     else
         parse(ARGV[0])
     end

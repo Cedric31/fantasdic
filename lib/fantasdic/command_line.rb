@@ -32,23 +32,23 @@ class CommandLineOptions < Hash
             @options = OptionParser.new do |opts|
                 opts.banner = \
                     _("Usage: fantasdic [options] [dictionary] [word]")
-    
-                opts.on("-o", "--stdout", 
+
+                opts.on("-o", "--stdout",
                         _("Print results to stdout")) do |b|
                     self[:stdout] = b
                 end
-    
-                opts.on("-l", "--dict-list", 
+
+                opts.on("-l", "--dict-list",
                         _("List dictionaries in settings")) do |b|
                     self[:dict_list] = b
                 end
-    
-                opts.on("-s", "--strat-list dictionary", String, 
+
+                opts.on("-s", "--strat-list dictionary", String,
                         _("List strategies available for dictionary")) do |dict|
                     self[:strat_list] = dict
                 end
-    
-                opts.on("-m", "--match strategy", String, 
+
+                opts.on("-m", "--match strategy", String,
                         _("Use strategy to match words")) do |strat|
                     self[:match] = strat
                 end
@@ -57,7 +57,7 @@ class CommandLineOptions < Hash
                     puts opts
                     exit!
                 end
-       
+
                 opts.on_tail("-v", "--version", _("Show version")) do
                     puts "Fantasdic %s" % Fantasdic::VERSION
                     exit!
@@ -67,7 +67,7 @@ class CommandLineOptions < Hash
                         _("Enable debug mode")) do |b|
                     $DEBUG = b
                 end
-    
+
             end
 
             @options.parse!
@@ -145,7 +145,7 @@ def self.define(dict, word)
         print_definitions(definitions)
     rescue Source::SourceError => e
         puts e.to_s
-    end    
+    end
 end
 
 def self.print_matches(matches)
@@ -153,7 +153,7 @@ def self.print_matches(matches)
         puts _("No match found.")
         return
     end
-        
+
     matches.each do |db, word|
         s = word.join(", ")
         puts "[%s]" % db
@@ -194,14 +194,14 @@ end
 def self.strat_list(dict)
     dict, infos = connect(dict)
     return if dict.nil?
-    
+
     begin
         dict.open
         dict.available_strategies.each_key { |k| puts k }
         dict.close
     rescue Source::SourceError => e
         puts e.to_s
-    end    
+    end
 end
 
 end

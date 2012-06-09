@@ -34,10 +34,10 @@ def parse
     $stdin.each_line do |line|
         word, *meanings = line.split('/')
         word.strip!
-    
+
         word, reading = word.split(' ')
         reading = reading.slice(1...-1) unless reading.nil?
-    
+
         puts_def word, reading, meanings
 
         i += 1

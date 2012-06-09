@@ -29,7 +29,7 @@ module UI
 
         def initialize(parent, word)
             super()
-            self.transient_for = parent            
+            self.transient_for = parent
             self.decorated = false
 
             p_width, p_height = parent.size
@@ -40,7 +40,7 @@ module UI
             y += (p_height - DEFAULT_HEIGHT) / 2
 
             move(x, y)
-    
+
             @word = word
 
             set_default_size(DEFAULT_WIDTH, DEFAULT_HEIGHT)
@@ -51,7 +51,7 @@ module UI
                                         :justification => Gtk::JUSTIFY_CENTER)
             @iter = @textview.buffer.get_iter_at_offset(0)
             @textview.buffer.insert(@iter, word, "text")
- 
+
             @button = Gtk::Button.new(Gtk::Stock::CLOSE)
             @button.signal_connect("clicked") { self.destroy }
 
@@ -59,22 +59,22 @@ module UI
 
             vbox.pack_start(@button, false, false)
 
-            scroll = Gtk::ScrolledWindow.new.add(@textview)        
+            scroll = Gtk::ScrolledWindow.new.add(@textview)
             scroll.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC)
             vbox.pack_start(scroll)
 
             add(vbox)
 
-            show_all            
+            show_all
         end
 
     end
-    
+
     class LinkBuffer < Gtk::TextBuffer
 
         MAX_FONT_SIZE = 24
         MIN_FONT_SIZE = 8
-        
+
         DEFAULT_HEADER_FONT_SIZE = 12
         DEFAULT_FONT_SIZE = 10
         RATIO = DEFAULT_HEADER_FONT_SIZE / DEFAULT_FONT_SIZE.to_f
@@ -98,7 +98,7 @@ module UI
         end
 
         def selected_text
-            selection_mark = self.selection_bound          
+            selection_mark = self.selection_bound
             selection_iter = self.get_iter_at_mark(selection_mark)
             insert_mark = self.get_mark("insert")
             insert_iter = self.get_iter_at_mark(insert_mark)
@@ -111,8 +111,8 @@ module UI
                 delete_mark(mark) unless get_mark(mark).nil?
             end
             tag_table.each { |t| tag_table.remove(t) unless t.name }
-            @iter = get_iter_at_offset(0)  
-             
+            @iter = get_iter_at_offset(0)
+
 
             @definitions = []
             @def_offsets = [] # iter offsets
@@ -121,7 +121,7 @@ module UI
 
             # Make the scroll go up
             #@scrolled_window.vadjustment.value = \
-            #    @scrolled_window.vadjustment.lower    
+            #    @scrolled_window.vadjustment.lower
         end
 
         def n_definitions
@@ -142,7 +142,7 @@ module UI
 
         def get_definition_at_offset(offset)
             value = @def_offsets.find_all { |v| offset >= v }.last
-            @def_offsets.index(value)        
+            @def_offsets.index(value)
         end
 
         def n_databases
@@ -192,7 +192,7 @@ module UI
             loader = Gdk::PixbufLoader.new
             loader.write(raw)
             loader.close
- 
+
             insert(@iter, loader.pixbuf)
         end
 
@@ -215,14 +215,14 @@ module UI
         end
 
         # Insert with support for:
-        # - pango markup (pseudo html) 
+        # - pango markup (pseudo html)
         # - images: [img src="..." /] or [img b64="..." /]
         # - links: {reference}
 
         LINK_REGEXP = /\{([\w\s\-]+)\}/
         IMG_SRC_REGEXP = /\[img src="([^\"]+)" \/\]/
         IMG_B64_REGEXP = /\[img b64="([a-zA-Z0-9\+\/\=]+)" \/\]/
-        
+
         def insert_all(str)
             link_pos, link_val = [LINK_REGEXP =~ str, $1]
             img_src_pos, img_src_val = [IMG_SRC_REGEXP =~ str, $1]
@@ -245,7 +245,7 @@ module UI
                     -1
                 else
                     a <=> b
-                end  
+                end
             end
 
             if not link_pos and not img_src_pos and not img_b64_pos
@@ -286,7 +286,7 @@ module UI
 
         # Change text size
 
-        def increase_size            
+        def increase_size
             text_tag = self.tag_table.lookup("text")
             text_size = text_tag.size_points
             unless text_size >= MAX_FONT_SIZE
@@ -302,7 +302,7 @@ module UI
             end
         end
 
-        def decrease_size            
+        def decrease_size
             text_tag = self.tag_table.lookup("text")
             text_size = text_tag.size_points
             unless text_size <= MIN_FONT_SIZE
@@ -331,7 +331,7 @@ module UI
 
         # Font name
 
-        def font_name=(fn=nil)      
+        def font_name=(fn=nil)
             unless self.font_name == fn
                 fn = DEFAULT_FONT.to_s unless fn
                 font_desc = Pango::FontDescription.new(fn)
@@ -380,20 +380,20 @@ module UI
             insert_definitions(definitions)
         end
     end
-    
+
     class ResultTextView < Gtk::TextView
         include GetText
         GetText.bindtextdomain(Fantasdic::TEXTDOMAIN, nil, nil, "UTF-8")
-        
+
         type_register
 
-        self.signal_new("link_clicked", 
+        self.signal_new("link_clicked",
                         GLib::Signal::ACTION,
                         nil,
                         GLib::Type["void"],
                         GLib::Type["VALUE"],
                         GLib::Type["VALUE"])
-        
+
         def initialize
             super()
             self.buffer = LinkBuffer.new
@@ -401,7 +401,7 @@ module UI
             self.wrap_mode = Gtk::TextTag::WRAP_WORD
             self.cursor_visible = false
             self.left_margin = 3
-            
+
             @hand_cursor = Gdk::Cursor.new(Gdk::Cursor::HAND2)
             @regular_cursor = Gdk::Cursor.new(Gdk::Cursor::XTERM)
             @hovering = false
@@ -484,30 +484,30 @@ module UI
                     if x and y
                         bx, by = window_to_buffer_coords(
                                   Gtk::TextView::WINDOW_TEXT, x, y)
-                        if iter = get_iter_at_location(bx, by) 
+                        if iter = get_iter_at_location(bx, by)
                             follow_if_link(iter, event)
                         end
                     end
                 end
                 false
             end
-            
+
             signal_connect("motion-notify-event") do |tv, event|
-                x, y = tv.window_to_buffer_coords(Gtk::TextView::WINDOW_WIDGET, 
+                x, y = tv.window_to_buffer_coords(Gtk::TextView::WINDOW_WIDGET,
                                                   event.x, event.y)
                 set_cursor_if_appropriate(x, y)
                 self.window.pointer
-                
-                false    
+
+                false
             end
-            
+
             signal_connect("visibility-notify-event") do |tv, event|
                 window, wx, wy = tv.window.pointer
                 bx, by = tv.window_to_buffer_coords(
                             Gtk::TextView::WINDOW_WIDGET, wx, wy)
                 set_cursor_if_appropriate(bx, by)
-                false    
-            end            
+                false
+            end
         end
 
         def follow_if_link(iter, event)
@@ -553,7 +553,7 @@ module UI
         end
 
         public
-        
+
         def find_backward(str)
             return false if str.empty?
 
@@ -568,7 +568,7 @@ module UI
             end
 
             match_start, match_end = iter.backward_case_insensitive_search(
-                                       str, 
+                                       str,
                                        Gtk::TextIter::SEARCH_TEXT_ONLY |
                                        Gtk::TextIter::SEARCH_VISIBLE_ONLY,
                                        nil)
@@ -608,7 +608,7 @@ module UI
             end
 
             match_start, match_end = iter.forward_case_insensitive_search(
-                                       str, 
+                                       str,
                                        Gtk::TextIter::SEARCH_TEXT_ONLY |
                                        Gtk::TextIter::SEARCH_VISIBLE_ONLY,
                                        nil)
@@ -622,11 +622,11 @@ module UI
                 self.buffer.create_mark("last-search-prev", match_start, false)
                 self.buffer.create_mark("last-search-next", match_end, false)
                 return true
-            else            
+            else
                 return false
             end
         end
-        
+
     end
 end
 

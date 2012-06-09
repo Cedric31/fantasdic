@@ -76,7 +76,7 @@ $narrow = {
     41827 => "ɡ",
     41828 => "ã",
     41829 => "~ɔ",
-    
+
 }
 
 $wide = {
@@ -97,7 +97,7 @@ $wide = {
     42096 => ")",
     42097 => "(",
     42098 => ")"
-    
+
 }
 
 # Add gaiji such as ① from 1 to 34
@@ -109,7 +109,7 @@ end
 
 class String
     def to_utf8
-        begin 
+        begin
             Iconv.new("utf-8", "euc-jp").iconv(self)
         rescue Iconv::IllegalSequence
             ""
@@ -141,9 +141,9 @@ class IndexExtractor
 
     def initialize(dir, subbook)
         book = EB::Book.new
-        book.bind(dir)        
+        book.bind(dir)
         book.subbook = subbook.to_i
-       
+
         book.search("") do |heading, text|
             puts heading.to_utf8
         end
@@ -155,29 +155,29 @@ class GaijiExtractor
 
     def initialize(dir, subbook)
         book = EB::Book.new
-        book.bind(dir)        
+        book.bind(dir)
         book.subbook = subbook.to_i
-        
+
         h = EB::Hookset.new
-        
+
         h.register(EB::HOOK_NARROW_FONT) do |eb2,argv|
             code = argv[0]
             bmp = book.gaiji_n(code)
-            file = "narrow_" + code.to_s + ".bmp"    
+            file = "narrow_" + code.to_s + ".bmp"
             File.new(file, File::CREAT|File::RDWR).write(bmp) \
                 unless FileTest.exist? file
             "<?>"
         end
-        
+
         h.register(EB::HOOK_WIDE_FONT) do |eb2,argv|
             code = argv[0]
             bmp = book.gaiji_w(code)
-            file = "wide_" + code.to_s + ".bmp"    
+            file = "wide_" + code.to_s + ".bmp"
             File.new(file, File::CREAT|File::RDWR).write(bmp) \
                 unless FileTest.exist? file
             "<?>"
         end
-        
+
         book.hookset = h
 
         book.search("") do
@@ -189,9 +189,9 @@ end
 
 class Converter
 
-    def puts_definition(headword, definition)   
+    def puts_definition(headword, definition)
         puts "_____\n\n#{headword}"
-        puts " "       
+        puts " "
         puts definition
         puts ""
     end
@@ -209,7 +209,7 @@ class Converter
             code = argv[0]
         "<gaiji_n:%d>" % code
         end
-        
+
         h.register(EB::HOOK_WIDE_FONT) do |eb2,argv|
             code = argv[0]
             "<gaiji_w:%d>" % code
@@ -219,20 +219,20 @@ class Converter
         h.register(EB::HOOK_BEGIN_REFERENCE) do
             "{"
         end
-        
+
         h.register(EB::HOOK_END_REFERENCE) do
             "}"
         end
 
         book.hookset = h
-        
+
         checksums = {}
-        
+
 
         book.search("") do |heading, text|
             heading = heading.to_utf8
             text = text.to_utf8
-    
+
             text.scan(/<gaiji_(n|w):(\d+)>/).each do |type, code|
                 code = code.to_i
                 if type == "n"
@@ -243,11 +243,11 @@ class Converter
                     text.gsub!("<gaiji_w:%d>" % code, $wide[code])
                 end
             end
-            
+
             if @check_uniqueness
-                checksum = MD5::new(text).hexdigest          
+                checksum = MD5::new(text).hexdigest
                 checksums[heading] ||= []
-    
+
                 unless checksums[heading].include? checksum
                     checksums[heading] << checksum
                     puts_definition(heading, text)
@@ -256,7 +256,7 @@ class Converter
                 puts_definition(heading, text)
             end
         end
-       
+
 
     end
 
@@ -264,14 +264,14 @@ end
 
 class CrownFRConverter < Converter
 
-    def puts_definition(headword, definition)   
+    def puts_definition(headword, definition)
         headword.gsub!(/^(━━)/, "")
         headword.gsub!(/(\,)$/, "")
         headword.gsub!(/(\(\w+\))$/, "")
         headword.gsub!(/([0-9]+)$/, "")
 
         puts "_____\n\n#{headword}"
-        puts " "       
+        puts " "
         puts definition
         puts ""
     end
@@ -282,12 +282,12 @@ class ConcJFConverter < Converter
 
     def initialize(dir, subbook)
         super(dir, subbook, true)
-    end   
-    
+    end
+
     def get_alt(word)
         word = word.dup
         s = word.scan(/(.{1})\((.*)\)/)
-        
+
         if s.empty?
             [word, nil]
         else
@@ -301,28 +301,28 @@ class ConcJFConverter < Converter
         end
     end
 
-    def puts_definition(headword, definition)   
+    def puts_definition(headword, definition)
         headword.split(" ").each do |w|
-            get_alt(w).each do |word|           
+            get_alt(w).each do |word|
                 unless word.nil?
                     puts "_____\n\n#{word}"
-                    puts " "       
+                    puts " "
                     puts definition
                     puts ""
                 end
-            end            
+            end
         end
     end
 end
 
 class EijiroConverter < Converter
 
-    def puts_definition(headword, definition)   
+    def puts_definition(headword, definition)
         headword.gsub!(/^(\~\ |__% |__ |__\-)/, "")
         #headword = headword.split(" ").first
 
         puts "_____\n\n#{headword}"
-        puts " "       
+        puts " "
         puts definition
         puts ""
     end
@@ -393,7 +393,7 @@ else
         ConcJFConverter.new(ARGV[1], ARGV[2])
     elsif ARGV[0] == "eijiro"
         EijiroConverter.new(ARGV[1], ARGV[2])
-    else 
+    else
         usage
     end
 end

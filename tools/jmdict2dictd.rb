@@ -88,7 +88,7 @@ def add_entry(e)
                 txt += "#{sense[s].join(', ')}\n" if sense[s]
             else
                 txt += "#{SENSE[s]}: #{sense[s].join(', ')}\n" if sense[s]
-            end            
+            end
         end
         txt += "\n"
     end if e[:sense]
@@ -103,7 +103,7 @@ def add_entry(e)
             txt += "#{INFO[i]}: #{info[i].join(', ')}\n" if info[i]
         end
         txt += "\n"
-    end if e[:info]    
+    end if e[:info]
 
     $dictfmt.add_entry(kw, txt)
 end
@@ -214,7 +214,7 @@ end
 
 def parse(file)
     list = Listener.new
-    
+
     if defined? XML::Parser
         list.parse(file.read)
     else

@@ -54,7 +54,7 @@ module Source
         GetText.bindtextdomain(Fantasdic::TEXTDOMAIN, nil, nil, "UTF-8")
 
         @registered_sources = []
-        
+
         DEFAULT_SOURCE = "DictdFile"
         ALL_DATABASES = DICTClient::ALL_DATABASES
         MAX_CACHE = 30
@@ -191,10 +191,10 @@ module Source
             matches = {}
             dbs.each do |db|
                 m = match(db, strategy, word)
-                m.each_key do |found_db|   
+                m.each_key do |found_db|
                     matches[found_db] = m[found_db]
                 end
-            end        
+            end
             matches
         end
 
@@ -257,7 +257,7 @@ module Source
         end
 
         def convert_to_utf8(src_enc, str)
-            begin 
+            begin
                 Iconv.new("utf-8", src_enc).iconv(str)
             rescue Iconv::IllegalSequence
                 raise Source::SourceError, _("Can't convert encodings.")
@@ -265,7 +265,7 @@ module Source
         end
 
         def convert_utf8_to(dest_enc, str)
-            begin 
+            begin
                 Iconv.new(dest_enc, "utf-8").iconv(str)
             rescue Iconv::IllegalSequence
                 raise Source::SourceError, _("Can't convert encodings.")

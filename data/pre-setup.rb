@@ -23,4 +23,3 @@ Dir.new("doc/fantasdic/html").each do |dir|
         FileUtils.rm_f(Dir.glob(File.join(dir, "*.mo")))
     end
 end
-
