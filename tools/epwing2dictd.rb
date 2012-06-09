@@ -1,3 +1,5 @@
+# coding: UTF-8
+
 # EPWING to dictd format converter
 # Copyright (C) 2006 - 2007 Mathieu Blondel
 #
@@ -395,4 +397,3 @@ else
         usage
     end
 end
-    

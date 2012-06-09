@@ -1,3 +1,5 @@
+# coding: UTF-8
+
 #
 # Ruby implementation of the Double Metaphone algorithm by Lawrence Philips,
 # originally published in the June 2000 issue of C/C++ Users Journal.
