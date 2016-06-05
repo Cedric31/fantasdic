@@ -3,6 +3,7 @@
 # This file is distributed under the same license as Fantasdic.
 #
 # Yannig Marchegay (Kokoyaya) <yannig@marchegay.org> - 2006-2007
+# Cédric Valmary (totenoc.eu) <cvalmary@yahoo.fr> - 2016
 #
 msgid ""
 msgstr ""
@@ -10,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-03-07 10:19+0100\n"
 "PO-Revision-Date: 2007-12-27 15:06+0100\n"
-"Last-Translator: Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>\n"
+"Last-Translator: Cédric Valmary (totenoc.eu) <cvalmary@yahoo.fr>\n"
 "Language-Team: Occitan (post 1500) <ubuntu-l10n-oci@lists.ubuntu.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,11 +20,11 @@ msgstr ""
 
 #: ../data/fantasdic/glade/add_dictionary_dialog.glade.h:1
 msgid "<b>Print</b>"
-msgstr "<b>Estampar</b>"
+msgstr "<b>Imprimir</b>"
 
 #: ../data/fantasdic/glade/add_dictionary_dialog.glade.h:2
 msgid "<b>Results</b>"
-msgstr "<b>Resultas</b>"
+msgstr "<b>Resultats</b>"
 
 #: ../data/fantasdic/glade/add_dictionary_dialog.glade.h:3
 msgid "Add dictionary"
@@ -43,23 +44,23 @@ msgstr "Poliças"
 
 #: ../data/fantasdic/glade/add_dictionary_dialog.glade.h:7
 msgid "Move database to selected databases"
-msgstr ""
+msgstr "Desplaçar la basa cap a las basas seleccionadas"
 
 #: ../data/fantasdic/glade/add_dictionary_dialog.glade.h:8
 msgid "Remove database from selected databases"
-msgstr ""
+msgstr "Levar la basa de las basas seleccionadas"
 
 #: ../data/fantasdic/glade/add_dictionary_dialog.glade.h:9
 msgid "Restore default fonts"
-msgstr ""
+msgstr "Restablir las poliças per defaut"
 
 #: ../data/fantasdic/glade/add_dictionary_dialog.glade.h:10
 msgid "Search _all databases"
-msgstr ""
+msgstr "Recercar dins _totas las basas de donadas"
 
 #: ../data/fantasdic/glade/add_dictionary_dialog.glade.h:11
 msgid "Search selected _databases"
-msgstr ""
+msgstr "Recercar dins las basas _seleccionadas"
 
 #: ../data/fantasdic/glade/add_dictionary_dialog.glade.h:12
 msgid "Select a font"
@@ -71,7 +72,7 @@ msgstr "Basas de donadas seleccionadas"
 
 #: ../data/fantasdic/glade/add_dictionary_dialog.glade.h:14
 msgid "Source"
-msgstr "Sorga"
+msgstr "Font"
 
 #: ../data/fantasdic/glade/add_dictionary_dialog.glade.h:15
 msgid ""
@@ -85,11 +86,11 @@ msgstr "_Nom :"
 
 #: ../data/fantasdic/glade/add_dictionary_dialog.glade.h:17
 msgid "_Source:"
-msgstr "_Sorga :"
+msgstr "_Font :"
 
 #: ../data/fantasdic/glade/main_app.glade.h:1
 msgid "<i>Not found</i>"
-msgstr ""
+msgstr "<i>Pas trobada</i>"
 
 #: ../data/fantasdic/glade/main_app.glade.h:2
 msgid "Fantasdic"
@@ -102,7 +103,7 @@ msgstr "Recercar : "
 #: ../data/fantasdic/glade/main_app.glade.h:4
 #: ../lib/fantasdic/ui/main_app.rb:291
 msgid "Matches"
-msgstr ""
+msgstr "Correspondéncias"
 
 #: ../data/fantasdic/glade/main_app.glade.h:5
 msgid "_Next"
@@ -118,7 +119,7 @@ msgstr "<b>Aviada</b>"
 
 #: ../data/fantasdic/glade/preferences_dialog.glade.h:2
 msgid "<b>System tray</b>"
-msgstr ""
+msgstr "<b>Zòna de notificacion</b>"
 
 #: ../data/fantasdic/glade/preferences_dialog.glade.h:3
 msgid "Dictionaries"
@@ -150,7 +151,7 @@ msgstr "Òste :"
 
 #: ../data/fantasdic/glade/preferences_dialog.glade.h:10
 msgid "Password:"
-msgstr "Mot de pas :"
+msgstr "Senhal :"
 
 #: ../data/fantasdic/glade/preferences_dialog.glade.h:11
 msgid "Port:"
@@ -166,7 +167,7 @@ msgstr "Proxy"
 
 #: ../data/fantasdic/glade/preferences_dialog.glade.h:14
 msgid "Startup"
-msgstr ""
+msgstr "Aviada"
 
 #: ../data/fantasdic/glade/preferences_dialog.glade.h:15
 msgid ""
@@ -216,11 +217,11 @@ msgstr ""
 
 #: ../lib/fantasdic/command_line.rb:56
 msgid "Show this message"
-msgstr "Visualizar aqueste messatge"
+msgstr "Afichar aqueste messatge"
 
 #: ../lib/fantasdic/command_line.rb:61
 msgid "Show version"
-msgstr "Visualizar la version"
+msgstr "Afichar la version"
 
 #: ../lib/fantasdic/command_line.rb:85
 msgid "Error: Dictionary does not exist in the settings"
@@ -264,7 +265,7 @@ msgstr ""
 
 #: ../lib/fantasdic/sources/dict_server.rb:34
 msgid "Server details"
-msgstr "Entresenhas sul servidor"
+msgstr "Detalhss sul servidor"
 
 #: ../lib/fantasdic/sources/dict_server.rb:60
 #: ../lib/fantasdic/sources/dict_server.rb:266
@@ -291,7 +292,7 @@ msgstr ""
 
 #: ../lib/fantasdic/sources/dict_server.rb:82
 msgid "Password missing."
-msgstr "Manca lo mot de pas."
+msgstr "Manca lo senhal."
 
 #: ../lib/fantasdic/sources/dict_server.rb:103
 msgid "_Server:"
@@ -311,7 +312,7 @@ msgstr "_Nom d'utilizaire :"
 
 #: ../lib/fantasdic/sources/dict_server.rb:144
 msgid "Pass_word:"
-msgstr "_Mot de pas :"
+msgstr "_Senhal :"
 
 #: ../lib/fantasdic/sources/dict_server.rb:311
 #: ../lib/fantasdic/sources/dict_server.rb:320
@@ -407,7 +408,7 @@ msgstr ""
 
 #: ../lib/fantasdic/ui/browser.rb:37
 msgid "Could not open browser."
-msgstr "Impossible de dobrir lo navegaire."
+msgstr "Impossible de dobrir lo navigador."
 
 #: ../lib/fantasdic/ui/browser.rb:42
 msgid "Could not find documentation."
@@ -429,7 +430,7 @@ msgstr ""
 
 #: ../lib/fantasdic/ui/main_app.rb:216
 msgid "Source error"
-msgstr ""
+msgstr "Error de la font"
 
 #: ../lib/fantasdic/ui/main_app.rb:249
 msgid "No definition found."
@@ -439,7 +440,7 @@ msgstr ""
 #, c-format
 msgid "One definition found."
 msgid_plural "Definitions found: %d."
-msgstr[0] "Definicions trobadas : %d."
+msgstr[0] "Definicion trobada : %d."
 msgstr[1] "Definicions trobadas : %d."
 
 #: ../lib/fantasdic/ui/main_app.rb:288
@@ -460,7 +461,7 @@ msgstr ""
 
 #: ../lib/fantasdic/ui/main_app.rb:592 ../lib/fantasdic/ui/main_app.rb:887
 msgid "Select _All"
-msgstr "_Tot seleccionar"
+msgstr "Seleccionar _tot"
 
 #: ../lib/fantasdic/ui/main_app.rb:718
 msgid "Save definition"
@@ -492,11 +493,11 @@ msgstr "Recercar lo _precedent"
 
 #: ../lib/fantasdic/ui/main_app.rb:900
 msgid "_View"
-msgstr "_Visualizar"
+msgstr "_Afichatge"
 
 #: ../lib/fantasdic/ui/main_app.rb:901
 msgid "_Text size"
-msgstr "Talha de _tèxt"
+msgstr "Talha de _tèxte"
 
 #: ../lib/fantasdic/ui/main_app.rb:906
 msgid "Zoom normal"
@@ -516,7 +517,7 @@ msgstr "_Ensenhador"
 
 #: ../lib/fantasdic/ui/main_app.rb:921
 msgid "Submit _Bug Report"
-msgstr "Enviar un rapòrt d'_anomalias"
+msgstr "Enviar un rapòrt d'_anomalia"
 
 #: ../lib/fantasdic/ui/main_app.rb:923
 msgid "About"
@@ -536,7 +537,7 @@ msgstr "Barra d'e_stat"
 
 #: ../lib/fantasdic/ui/main_app.rb:969
 msgid "_Toolbar"
-msgstr "_Barra d'espleches"
+msgstr "_Barra d'aisinas"
 
 #: ../lib/fantasdic/ui/main_app.rb:971
 msgid "_Keep above"
@@ -574,4 +575,4 @@ msgstr ""
 #~ msgstr "Divèrs"
 
 #~ msgid "A client for the DICT protocol."
-#~ msgstr "Un client pour le protocole DICT."
+#~ msgstr "Un client pel protocòl DICT."
